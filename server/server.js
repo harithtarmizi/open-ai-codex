@@ -33,16 +33,15 @@ app.post("/", async (req, res) => {
       top_p: 1,
       frequency_penalty: 0.5,
       presence_penalty: 0,
-      stop: ["\"\"\""],
     });
 
     res.status(200).send({
       bot: response.data.choices[0].text,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).send({ error });
+    console.error(error);
+    res.status(500).send(error || "Something went wrong here");
   }
 });
 
-app.listen(5000, () => console.log(`Server is running on port http://localhost:5000`));
+app.listen(5000, () => console.log(`AI server started on http://localhost:5000`));
